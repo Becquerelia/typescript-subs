@@ -7,7 +7,8 @@ interface Props {
   }>;
 }
 
-function List({subs}: Props) {
+function List(props: Props) {
+  const { subs } = props;
   return (
     <ul>
       {subs.map((eachSub) => {
