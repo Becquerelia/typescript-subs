@@ -32,12 +32,15 @@ function App() {
 
   const handleNewSub = (newSub: Sub): void => {
     setSubs(subs => [...subs, newSub])
+    setNewSubsNumber(n => n + 1)
   }
  
   return (
     <div className="App" ref={divRef} >
       <h1>Subscribers List:</h1>
       <List subs={subs} />
+      New subscribers: {newSubsNumber}
+      <br /><br />
       <Form onNewSub={handleNewSub}/>
 
     </div>
