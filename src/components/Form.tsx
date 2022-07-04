@@ -1,54 +1,16 @@
 //! IMPORTS & CONSTS:
-import { useReducer, useState } from "react";
 import { Sub } from "../types";
-
-const INITIAL_STATE = {
-    nick: " ",
-    subMonths: 0,
-    avatar: " ",
-    description: " ",
-  };
+import useNewSubForm from '../hooks/useNewSubForm';
 
 //! INTERFACES:
-interface FormState {
-  inputValues: Sub;
-}
-
 interface FormProps {
   onNewSub: (newSub: Sub) => void;
 }
 
-//! TYPES:
-type FormReducerAction = {
-    type: "change_value",
-    payload: {
-        inputName: string,
-        inputValue: string
-    }
-} | {
-    type: "clear"
-}
-
-//! REDUCER:
-const formReducer = (state: FormState["inputValues"], action: FormReducerAction) => {
-  switch (action.type) {
-    case "change_value":
-      const { inputName, inputValue } = action.payload;
-      return {
-        ...state,
-        [inputName]: inputValue,
-      };
-
-      case "clear":      
-      return INITIAL_STATE;
-  }
-};
-
 //! FUNCTION COMPONENT:
 function Form({ onNewSub }: FormProps) {
-  // const [inputValues, setInputValues] = useState<FormState["inputValues"]>(INITIAL_STATE);
 
-  const [inputValues, dispatch] = useReducer(formReducer, INITIAL_STATE);
+  const [inputValues, dispatch] = useNewSubForm()
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
